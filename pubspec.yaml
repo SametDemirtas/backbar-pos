@@ -1,0 +1,13 @@
+name: backbar_pos_workspace
+description: >
+  Lightweight POS with remote menu control. A Dart pub workspace holding the
+  shared domain package and the two Flutter applications that consume it.
+publish_to: none
+
+environment:
+  sdk: ^3.10.7
+
+workspace:
+  - packages/core
+  - apps/pos
+  - apps/manager

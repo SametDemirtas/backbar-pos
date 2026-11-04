@@ -1,0 +1,32 @@
+name: backbar_pos_core
+description: >
+  Shared domain layer for the POS and Manager applications: models, Firestore
+  repositories, order logic and the widgets both apps render.
+version: 0.1.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.10.7
+  flutter: ">=3.38.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cloud_firestore: ^6.0.3
+  firebase_auth: ^6.1.1
+  firebase_core: ^4.1.4
+
+dev_dependencies:
+  fake_cloud_firestore: ^4.2.0
+  firebase_auth_mocks: ^0.15.2
+  flutter_lints: ^6.0.0
+  mock_exceptions: ^0.8.2
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  fonts:
+    - family: Archivo
+      fonts:
+        - asset: assets/fonts/Archivo.ttf

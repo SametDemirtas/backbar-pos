@@ -1,0 +1,128 @@
+<meta charset="utf-8">
+<link rel="stylesheet" href="tokens.css">
+<title>Menu tile: every state</title>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(3, 208px); gap: var(--s3); }
+
+  .tile {
+    position: relative; overflow: hidden;
+    min-height: 124px; padding: var(--s4);
+    display: flex; flex-direction: column; justify-content: space-between;
+    background: var(--ink-surface);
+    border: 1px solid var(--ink-line);
+    border-radius: var(--r-control);
+    transition: background var(--t-press) var(--ease);
+  }
+  .tile__name  { color: var(--bone-primary); }
+  .tile__foot  { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s2); }
+  .tile__price { color: var(--bone-primary); }
+
+  .tile::before {
+    content: ''; position: absolute; inset: 0 auto 0 0; width: 3px;
+    background: transparent;
+  }
+
+  .tile--in-order { background: var(--ink-raised); }
+  .qty {
+    min-width: 28px; height: 28px; padding: 0 7px;
+    display: grid; place-items: center;
+    background: var(--marquee); color: #2A1B03;
+    border-radius: var(--r-badge);
+    font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums;
+  }
+
+  .tile--sold::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(229,83,61,.10) 0 6px,
+      transparent 6px 13px
+    );
+  }
+  .tile--sold .tile__name  { color: var(--bone-muted); }
+  .tile--sold .tile__price { color: var(--ink-disabled); text-decoration: line-through;
+                             text-decoration-thickness: 2px; }
+  .sold-tag {
+    align-self: flex-start;
+    padding: 3px 6px; border-radius: var(--r-badge);
+    background: rgba(229,83,61,.10);
+    color: var(--ember-ink-dark);
+    font-size: 10px; font-weight: 800; font-stretch: 112%;
+    letter-spacing: .14em;
+  }
+
+  .tile--flash::before { background: var(--marquee); animation: flash 1.24s var(--ease) infinite; }
+  @keyframes flash {
+    0%    { opacity: 0; }
+    19%   { opacity: 1; }
+    68%   { opacity: 1; }
+    100%  { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tile--flash::before { animation: none; opacity: 1; }
+  }
+
+  .legend { margin-top: var(--s6); max-width: 66ch; }
+  .legend h3 { font-size: 13px; font-weight: 700; font-stretch: 125%;
+               letter-spacing: .16em; text-transform: uppercase;
+               color: var(--bone-secondary); margin: var(--s5) 0 var(--s2); }
+  .legend p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--bone-secondary); }
+</style>
+
+<div class="stage stage--dark">
+  <p class="stage__label">Menu tile · 208 px min wide · 124 px tall</p>
+
+  <div class="grid">
+    <div class="tile">
+      <div class="t-title tile__name">Camden Hells Lager</div>
+      <div class="tile__foot"><span class="t-price tile__price">£6.80</span></div>
+    </div>
+
+    <div class="tile tile--in-order">
+      <div class="t-title tile__name">Guinness, pint</div>
+      <div class="tile__foot">
+        <span class="t-price tile__price">£7.20</span>
+        <span class="qty">3</span>
+      </div>
+    </div>
+
+    <div class="tile tile--sold">
+      <span class="sold-tag">SOLD OUT</span>
+      <div class="t-title tile__name">Negroni</div>
+      <div class="tile__foot"><span class="t-price tile__price">£11.00</span></div>
+    </div>
+
+    <div class="tile tile--flash">
+      <div class="t-title tile__name">House Red, 175ml</div>
+      <div class="tile__foot"><span class="t-price tile__price">£7.50</span></div>
+    </div>
+
+    <div class="tile">
+      <div class="t-title tile__name">Loaded fries with smoked chilli mayo</div>
+      <div class="tile__foot"><span class="t-price tile__price">£8.00</span></div>
+    </div>
+
+    <div class="tile tile--sold tile--flash">
+      <span class="sold-tag">SOLD OUT</span>
+      <div class="t-title tile__name">Espresso Martini</div>
+      <div class="tile__foot"><span class="t-price tile__price">£12.50</span></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <h3>The leading edge</h3>
+    <p>
+      One 3px rule down the left of a tile means exactly one thing: someone just
+      changed this item in the manager app. Being in the current order is
+      carried by the raised tile and the gold quantity badge, so the two signals
+      never look alike.
+    </p>
+
+    <h3>Sold out stays visible</h3>
+    <p>A diagonal hatch across the tile, a struck price and the words SOLD OUT. A colourblind bartender in a dark room still gets all three, and they read from the other end of the bar. The item stays on the menu so the bartender can still answer "have you got any Negroni?"</p>
+
+    <h3>The change flash</h3>
+    <p>When a manager marks the Espresso Martini sold out, the tile on the till lights up as soon as the snapshot arrives, so the bartender sees the change land.</p>
+  </div>
+</div>

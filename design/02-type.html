@@ -1,0 +1,105 @@
+<meta charset="utf-8">
+<link rel="stylesheet" href="tokens.css">
+<title>Type: Archivo, one family, two widths</title>
+
+<style>
+  .stage { max-width: 980px; }
+  .spec {
+    display: grid; grid-template-columns: 1fr 220px;
+    gap: var(--s5); align-items: baseline;
+    padding: var(--s5) 0; border-bottom: 1px solid var(--ink-line);
+  }
+  .spec:last-child { border-bottom: 0; }
+  .spec dl { margin: 0; font-size: 11px; letter-spacing: .04em; color: var(--bone-muted); }
+  .spec dl div { display: flex; justify-content: space-between; padding: 2px 0; }
+  .spec dl b { color: var(--bone-secondary); font-weight: 600; }
+
+  .axis {
+    display: flex; flex-direction: column; gap: 2px;
+    margin: var(--s6) 0 0; padding-top: var(--s5);
+    border-top: 1px solid var(--ink-line);
+  }
+  .axis span { font-size: 34px; font-weight: 700; line-height: 1.05; white-space: nowrap; }
+</style>
+
+<div class="stage stage--dark">
+  <p class="stage__label">Archivo variable · wght 100–900 · wdth 62–125 · OFL · bundled, never fetched</p>
+
+  <div class="spec">
+    <div class="t-marquee" style="color:var(--bone-secondary)">Drinks &amp; snacks</div>
+    <dl>
+      <div><span>role</span><b>marquee</b></div>
+      <div><span>size / weight</span><b>13 / 700</b></div>
+      <div><span>width / tracking</span><b>125% / +.18em</b></div>
+    </dl>
+  </div>
+
+  <div class="spec">
+    <div class="t-title">Camden Hells Lager, pint</div>
+    <dl>
+      <div><span>role</span><b>tile title</b></div>
+      <div><span>size / weight</span><b>17 / 600</b></div>
+      <div><span>max lines</span><b>2, then ellipsis</b></div>
+    </dl>
+  </div>
+
+  <div class="spec">
+    <div class="t-price">£6.80</div>
+    <dl>
+      <div><span>role</span><b>tile price</b></div>
+      <div><span>size / weight</span><b>20 / 700</b></div>
+      <div><span>figures</span><b>tabular</b></div>
+    </dl>
+  </div>
+
+  <div class="spec">
+    <div class="t-total" style="color:var(--marquee)">£148.20</div>
+    <dl>
+      <div><span>role</span><b>running total</b></div>
+      <div><span>size / weight</span><b>40 / 800</b></div>
+      <div><span>width</span><b>87% condensed</b></div>
+    </dl>
+  </div>
+
+  <div class="spec">
+    <div class="t-body" style="color:var(--bone-secondary)">
+      Marked sold out from the manager app 40 seconds ago.
+    </div>
+    <dl>
+      <div><span>role</span><b>body</b></div>
+      <div><span>size / weight</span><b>15 / 450</b></div>
+    </dl>
+  </div>
+
+  <div class="spec">
+    <div class="t-meta" style="color:var(--bone-muted)">UPDATED 22:04 · TILL 2</div>
+    <dl>
+      <div><span>role</span><b>meta</b></div>
+      <div><span>size / weight</span><b>12 / 500</b></div>
+    </dl>
+  </div>
+
+  <div class="axis">
+    <span style="font-stretch:125%">WIDTH 125 — THE MARQUEE</span>
+    <span style="font-stretch:100%">WIDTH 100 — THE INTERFACE</span>
+    <span style="font-stretch:87%">WIDTH 87 — THE TOTAL</span>
+    <span style="font-stretch:62%">WIDTH 62 — HELD IN RESERVE</span>
+    <p class="caption" style="max-width:60ch">
+      One family covers every width, from the wide marquee labels to the condensed
+      total, so there is no second typeface to pair with it.
+    </p>
+  </div>
+
+  <div class="axis">
+    <div class="row" style="gap:var(--s7)">
+      <div>
+        <div class="t-total" style="font-variant-numeric:tabular-nums">£ 1,111.11<br>£ 8,888.88</div>
+        <p class="caption">Tabular: the column stays put</p>
+      </div>
+      <div>
+        <div class="t-total" style="font-variant-numeric:proportional-nums;color:var(--ember-ink-dark)">£ 1,111.11<br>£ 8,888.88</div>
+        <p class="caption">Proportional: the total shifts as items are rung in.</p>
+      </div>
+    </div>
+  </div>
+</div>

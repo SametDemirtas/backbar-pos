@@ -1,0 +1,102 @@
+<meta charset="utf-8">
+<link rel="stylesheet" href="tokens.css">
+<title>Manager row: the sold-out switch</title>
+
+<style>
+  .stage { display: flex; gap: var(--s7); align-items: flex-start; }
+  .phone {
+    width: 390px; background: var(--paper-base);
+    border: 1px solid var(--paper-line); border-radius: var(--r-sheet);
+    overflow: hidden;
+  }
+  .section {
+    padding: var(--s5) var(--s4) var(--s2);
+    color: var(--ink-secondary);
+  }
+
+  .row-item {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: var(--s3); align-items: center;
+    min-height: 72px; padding: var(--s3) var(--s4);
+    background: var(--paper-surface);
+    border-top: 1px solid var(--paper-line);
+  }
+  .row-item:last-child { border-bottom: 1px solid var(--paper-line); }
+  .row-item__name  { color: var(--ink-primary); font-size: 16px; font-weight: 600; line-height: 1.25; }
+  .row-item__price { color: var(--ink-secondary); font-size: 13px; font-weight: 550;
+                     font-variant-numeric: tabular-nums; margin-top: 3px; display: block; }
+
+  .row-item--sold { background: repeating-linear-gradient(-45deg,
+      rgba(185,58,37,.05) 0 6px, transparent 6px 13px), var(--paper-surface); }
+  .row-item--sold .row-item__name  { color: var(--ink-muted); }
+  .row-item--sold .row-item__price { color: var(--paper-disabled); text-decoration: line-through;
+                                     text-decoration-thickness: 2px; }
+
+  .switch {
+    width: 92px; height: 44px; border-radius: var(--r-control);
+    border: 1px solid var(--paper-line); background: var(--paper-well);
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 800; font-stretch: 112%; letter-spacing: .1em;
+    color: var(--ink-secondary); cursor: pointer;
+  }
+  .switch--on  { background: var(--marquee); border-color: var(--marquee); color: #2A1B03; }
+  .switch--off { background: rgba(185,58,37,.1); border-color: rgba(185,58,37,.28); color: var(--ember-ink); }
+  .switch--pending { background: var(--paper-well); color: var(--ink-muted); }
+
+  .notes { max-width: 44ch; }
+  .notes h3 { font-size: 13px; font-weight: 700; font-stretch: 125%; letter-spacing: .16em;
+              text-transform: uppercase; color: var(--bone-secondary); margin: 0 0 var(--s2); }
+  .notes p  { font-size: 14px; line-height: 1.55; color: var(--bone-secondary); margin: 0 0 var(--s5); }
+</style>
+
+<div class="stage stage--dark">
+
+  <div class="phone">
+    <div class="section t-marquee">Drinks</div>
+
+    <div class="row-item">
+      <div>
+        <div class="row-item__name">Guinness, pint</div>
+        <span class="row-item__price">£7.20</span>
+      </div>
+      <div class="switch switch--on">ON SALE</div>
+    </div>
+
+    <div class="row-item row-item--sold">
+      <div>
+        <div class="row-item__name">Camden Hells Lager</div>
+        <span class="row-item__price">£6.80</span>
+      </div>
+      <div class="switch switch--off">SOLD OUT</div>
+    </div>
+
+    <div class="row-item">
+      <div>
+        <div class="row-item__name">Neck Oil IPA</div>
+        <span class="row-item__price">£6.50</span>
+      </div>
+      <div class="switch switch--pending">UPDATING</div>
+    </div>
+
+    <div class="section t-marquee">Food</div>
+
+    <div class="row-item">
+      <div>
+        <div class="row-item__name">Loaded fries</div>
+        <span class="row-item__price">£8.00</span>
+      </div>
+      <div class="switch switch--on">ON SALE</div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h3>The switch says what it is</h3>
+    <p>A plain toggle makes the manager remember which way is on. This one carries its own label, so "is the Guinness off?" can be answered at arm's length with the phone in one hand.</p>
+
+    <h3>The tap shows at once</h3>
+    <p>The switch shows a pending state from the tap until the list shows the new value. If the write fails, the row goes back and says why, so a manager never thinks a line is off when it is still selling.</p>
+
+    <h3>Sold out is not hidden</h3>
+    <p>The same three signals as the till (hatch, struck price and label), so the manager sees what is off as quickly as what is on. Sold-out items stay in the list rather than in a separate tab, where they tend to be forgotten.</p>
+  </div>
+</div>

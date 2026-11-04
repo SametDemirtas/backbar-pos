@@ -1,0 +1,25 @@
+name: manager
+description: "Backbar Manager: phone application for remote menu control."
+publish_to: 'none'
+version: 1.0.0+1
+resolution: workspace
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  backbar_pos_core:
+    path: ../../packages/core
+  firebase_core: ^4.1.4
+
+dev_dependencies:
+  cloud_firestore: ^6.8.0
+  fake_cloud_firestore: ^4.2.0
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

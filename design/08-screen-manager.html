@@ -1,0 +1,128 @@
+<meta charset="utf-8">
+<link rel="stylesheet" href="tokens.css">
+<title>Manager: phone</title>
+
+<style>
+  body { background: #E7E1D7; padding: 32px; }
+  .frame { display: flex; gap: 32px; justify-content: center; align-items: flex-start; }
+  .device {
+    width: 390px; height: 844px;
+    background: var(--paper-base); color: var(--ink-primary);
+    border-radius: 28px; overflow: hidden;
+    border: 1px solid var(--paper-line);
+    box-shadow: var(--shadow-sheet);
+    display: flex; flex-direction: column;
+  }
+
+  .topbar { padding: var(--s6) var(--s4) var(--s4); border-bottom: 1px solid var(--paper-line); }
+  .topbar__row { display: flex; align-items: flex-start; justify-content: space-between; }
+  .venue { font-size: 26px; font-weight: 800; font-stretch: 104%; letter-spacing: -.01em; line-height: 1.1; }
+  .venue small { display: block; margin-top: 6px; color: var(--ink-muted);
+                 font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+  .live { display: flex; align-items: center; gap: 7px; color: var(--marquee-ink);
+          font-size: 10px; font-weight: 800; letter-spacing: .12em;
+          background: rgba(242,176,61,.16); padding: 6px 9px; border-radius: var(--r-badge); }
+  .live b { width: 6px; height: 6px; border-radius: 50%; background: var(--marquee-ink); }
+
+  .counts { display: flex; gap: var(--s5); margin-top: var(--s5); }
+  .count b { display: block; font-size: 28px; font-weight: 800; font-stretch: 92%;
+             font-variant-numeric: tabular-nums; line-height: 1; }
+  .count span { display: block; margin-top: 5px; color: var(--ink-muted);
+                font-size: 10px; font-weight: 700; letter-spacing: .13em; }
+  .count--off b { color: var(--ember-ink); }
+
+  .list { flex: 1; overflow: hidden; }
+  .section { padding: var(--s5) var(--s4) var(--s2); color: var(--ink-secondary); }
+
+  .row-item { display: grid; grid-template-columns: 1fr auto; gap: var(--s3); align-items: center;
+              min-height: 72px; padding: var(--s3) var(--s4);
+              background: var(--paper-surface); border-top: 1px solid var(--paper-line); }
+  .row-item__name { font-size: 16px; font-weight: 600; line-height: 1.25; }
+  .row-item__price { display: block; margin-top: 3px; color: var(--ink-secondary);
+                     font-size: 13px; font-weight: 550; font-variant-numeric: tabular-nums; }
+  .row-item--sold { background: repeating-linear-gradient(-45deg,
+      rgba(185,58,37,.05) 0 6px, transparent 6px 13px), var(--paper-surface); }
+  .row-item--sold .row-item__name { color: var(--ink-muted); }
+  .row-item--sold .row-item__price { color: var(--paper-disabled);
+      text-decoration: line-through; text-decoration-thickness: 2px; }
+
+  .switch { width: 92px; height: 44px; border-radius: var(--r-control);
+            border: 1px solid var(--paper-line); background: var(--paper-well);
+            display: grid; place-items: center; cursor: pointer;
+            font-size: 11px; font-weight: 800; font-stretch: 112%; letter-spacing: .1em;
+            color: var(--ink-secondary); }
+  .switch--on  { background: var(--marquee); border-color: var(--marquee); color: #2A1B03; }
+  .switch--off { background: rgba(185,58,37,.1); border-color: rgba(185,58,37,.28); color: var(--ember-ink); }
+
+  .fab { position: relative; margin: 0 var(--s4) var(--s5); }
+  .fab button { width: 100%; height: 60px; border: 0; border-radius: var(--r-control);
+                background: var(--marquee); color: #2A1B03;
+                font-family: inherit; font-size: 15px; font-weight: 650; letter-spacing: .04em;
+                cursor: pointer; }
+
+  .notes { max-width: 38ch; color: var(--ink-secondary); }
+  .notes h3 { font-size: 13px; font-weight: 700; font-stretch: 125%; letter-spacing: .16em;
+              text-transform: uppercase; color: var(--ink-primary); margin: 0 0 var(--s2); }
+  .notes p  { font-size: 14px; line-height: 1.55; margin: 0 0 var(--s5); }
+</style>
+
+<div class="frame">
+  <div class="device">
+    <header class="topbar">
+      <div class="topbar__row">
+        <div class="venue">The Copper Kettle<small>MENU CONTROL</small></div>
+        <div class="live"><b></b>LIVE</div>
+      </div>
+      <div class="counts">
+        <div class="count"><b>19</b><span>ON SALE</span></div>
+        <div class="count count--off"><b>2</b><span>SOLD OUT</span></div>
+        <div class="count"><b>4</b><span>CATEGORIES</span></div>
+      </div>
+    </header>
+
+    <div class="list">
+      <div class="section t-marquee">Drinks</div>
+
+      <div class="row-item">
+        <div><div class="row-item__name">Guinness, pint</div><span class="row-item__price">£7.20</span></div>
+        <div class="switch switch--on">ON SALE</div>
+      </div>
+      <div class="row-item">
+        <div><div class="row-item__name">Camden Hells Lager</div><span class="row-item__price">£6.80</span></div>
+        <div class="switch switch--on">ON SALE</div>
+      </div>
+      <div class="row-item row-item--sold">
+        <div><div class="row-item__name">Espresso Martini</div><span class="row-item__price">£12.50</span></div>
+        <div class="switch switch--off">SOLD OUT</div>
+      </div>
+      <div class="row-item">
+        <div><div class="row-item__name">Negroni</div><span class="row-item__price">£11.00</span></div>
+        <div class="switch switch--on">ON SALE</div>
+      </div>
+
+      <div class="section t-marquee">Food</div>
+
+      <div class="row-item">
+        <div><div class="row-item__name">Loaded fries</div><span class="row-item__price">£8.00</span></div>
+        <div class="switch switch--on">ON SALE</div>
+      </div>
+      <div class="row-item row-item--sold">
+        <div><div class="row-item__name">Halloumi wrap</div><span class="row-item__price">£9.50</span></div>
+        <div class="switch switch--off">SOLD OUT</div>
+      </div>
+    </div>
+
+    <div class="fab"><button>NEW ITEM</button></div>
+  </div>
+
+  <div class="notes">
+    <h3>The header comes first</h3>
+    <p>A manager usually opens this app to check what is off right now, so the number of sold-out items is near the top, in ember, before the list.</p>
+
+    <h3>Light, on purpose</h3>
+    <p>Same tokens as the till with the ramp inverted. The till is used in a dark bar; this app is read in a delivery bay in the afternoon, where the till's dark palette would be hard to see.</p>
+
+    <h3>Live, stated</h3>
+    <p>The badge in the corner says LIVE only while the server has confirmed the menu on screen, CONNECTING before that and OFFLINE once the connection is lost. It is the first thing a manager checks when a change does not seem to arrive.</p>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function servesVenue(venueId) {
+      return venueId in ['copper-kettle'];
+    }
+
+    function inVenue(venueId) {
+      return signedIn() && servesVenue(venueId);
+    }
+
+    function knownCategory(value) {
+      return value in ['drinks', 'food', 'snacks', 'merch'];
+    }
+
+    function menuFieldNames() {
+      return [
+        'name', 'priceCents', 'category', 'isAvailable',
+        'createdAt', 'updatedAt'
+      ];
+    }
+
+    function menuShape(data) {
+      return data.keys().hasAll(['name', 'priceCents', 'category', 'isAvailable'])
+        && data.name is string
+        && data.name.size() > 0
+        && data.name.size() <= 60
+        && data.isAvailable is bool;
+    }
+
+    function validMenuFields(data) {
+      return data.keys().hasOnly(menuFieldNames())
+        && menuShape(data)
+        && knownCategory(data.category);
+    }
+
+    function validMenuEdit() {
+      return request.resource.data.diff(resource.data)
+          .affectedKeys().hasOnly(menuFieldNames())
+        && menuShape(request.resource.data)
+        && (knownCategory(request.resource.data.category)
+          || request.resource.data.category == resource.data.category);
+    }
+
+    function validPrice(priceCents) {
+      return priceCents is int
+        && priceCents > 0
+        && priceCents <= 100000000;
+    }
+
+    function validMenuItem(data) {
+      return validMenuFields(data) && validPrice(data.priceCents);
+    }
+
+    function stampedNow(data, field) {
+      return data[field] == request.time;
+    }
+
+    function isAvailabilityToggle() {
+      return request.resource.data.diff(resource.data)
+          .affectedKeys().hasOnly(['isAvailable', 'updatedAt'])
+        && request.resource.data.isAvailable is bool;
+    }
+
+    match /venues/{venueId}/menuItems/{itemId} {
+      allow read: if inVenue(venueId);
+
+      allow create: if inVenue(venueId)
+        && validMenuItem(request.resource.data)
+        && stampedNow(request.resource.data, 'createdAt')
+        && stampedNow(request.resource.data, 'updatedAt');
+
+      allow update: if inVenue(venueId)
+        && isAvailabilityToggle()
+        && stampedNow(request.resource.data, 'updatedAt');
+
+      allow update: if inVenue(venueId)
+        && validMenuEdit()
+        && (validPrice(request.resource.data.priceCents)
+          || (!validPrice(resource.data.priceCents)
+            && request.resource.data.priceCents == resource.data.priceCents))
+        && stampedNow(request.resource.data, 'updatedAt')
+        && request.resource.data.get('createdAt', null)
+            == resource.data.get('createdAt', null)
+        && ('createdAt' in request.resource.data)
+            == ('createdAt' in resource.data);
+
+      allow delete: if inVenue(venueId);
+    }
+
+    function validOrder(data) {
+      return data.keys().hasOnly([
+          'lines', 'itemCount', 'totalCents', 'tillLabel', 'staffUid',
+          'createdAt'
+        ])
+        && data.keys().hasAll([
+          'lines', 'itemCount', 'totalCents', 'tillLabel', 'staffUid',
+          'createdAt'
+        ])
+        && data.lines is list
+        && data.lines.size() > 0
+        && data.lines.size() <= 200
+        && data.itemCount is int && data.itemCount > 0
+        && data.itemCount <= 10000
+        && data.totalCents is int && data.totalCents > 0
+        && data.totalCents <= 100000000
+        && data.tillLabel is string
+        && data.tillLabel.size() > 0 && data.tillLabel.size() <= 40
+        && data.staffUid == request.auth.uid
+        && stampedNow(data, 'createdAt');
+    }
+
+    match /venues/{venueId}/orders/{orderId} {
+      allow read: if inVenue(venueId)
+        && resource.data.staffUid == request.auth.uid;
+
+      allow create: if inVenue(venueId) && validOrder(request.resource.data);
+
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

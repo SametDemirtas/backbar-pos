@@ -1,0 +1,140 @@
+<meta charset="utf-8">
+<link rel="stylesheet" href="tokens.css">
+<title>Order panel: lines, total, actions</title>
+
+<style>
+  .stage { display: flex; gap: var(--s7); align-items: flex-start; }
+
+  .panel {
+    width: 376px; background: var(--ink-well);
+    border-left: 1px solid var(--ink-line);
+    display: flex; flex-direction: column; min-height: 640px;
+  }
+  .panel__head {
+    padding: var(--s5) var(--s5) var(--s4);
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 1px solid var(--ink-line);
+  }
+  .panel__head .t-marquee { color: var(--bone-secondary); }
+  .panel__head .t-meta { color: var(--bone-muted); }
+
+  .lines { flex: 1; padding: var(--s2) 0; }
+
+  .line {
+    display: grid; grid-template-columns: 34px 1fr auto;
+    gap: var(--s3); align-items: baseline;
+    padding: var(--s3) var(--s5);
+    min-height: 56px;
+  }
+  .line__qty {
+    color: var(--marquee); font-size: 15px; font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+  .line__name { color: var(--bone-primary); font-size: 15px; font-weight: 550; line-height: 1.3; }
+  .line__unit { display: block; color: var(--bone-muted); font-size: 12px; font-weight: 500; margin-top: 3px; }
+  .line__amt  { color: var(--bone-primary); font-size: 16px; font-weight: 650;
+                font-variant-numeric: tabular-nums; }
+
+  .line--stale { background: rgba(229,83,61,.07); }
+  .line--stale .line__name { color: var(--bone-secondary); }
+  .line--stale .line__unit { color: var(--ember-ink-dark); }
+
+  .panel__foot { border-top: 1px solid var(--ink-line); padding: var(--s5); }
+  .totals { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: var(--s5); }
+  .totals .t-marquee { color: var(--bone-secondary); padding-bottom: 8px; }
+  .totals .t-total { color: var(--marquee); }
+
+  .actions { display: grid; grid-template-columns: 104px 1fr; gap: var(--s2); }
+  .btn {
+    height: 60px; border: 0; border-radius: var(--r-control);
+    font-family: inherit; cursor: pointer;
+    display: grid; place-items: center;
+  }
+  .btn--ghost   { background: transparent; border: 1px solid var(--ink-line); color: var(--bone-secondary); }
+  .btn--primary { background: var(--marquee); color: #2A1B03; }
+  .btn--primary[disabled] { background: var(--ink-raised); color: var(--ink-disabled); cursor: not-allowed; }
+
+  .empty { padding: var(--s8) var(--s5); text-align: center; color: var(--bone-muted); }
+  .empty__mark {
+    width: 44px; height: 44px; margin: 0 auto var(--s4);
+    border: 2px solid var(--ink-line); border-radius: var(--r-control);
+  }
+
+  .notes { max-width: 44ch; }
+  .notes h3 { font-size: 13px; font-weight: 700; font-stretch: 125%; letter-spacing: .16em;
+              text-transform: uppercase; color: var(--bone-secondary); margin: 0 0 var(--s2); }
+  .notes p  { font-size: 14px; line-height: 1.55; color: var(--bone-secondary); margin: 0 0 var(--s5); }
+</style>
+
+<div class="stage stage--dark">
+
+  <div class="panel">
+    <div class="panel__head">
+      <span class="t-marquee">Order</span>
+      <span class="t-meta">TILL 2 · 6 ITEMS</span>
+    </div>
+
+    <div class="lines">
+      <div class="line">
+        <span class="line__qty">3</span>
+        <span class="line__name">Guinness, pint<span class="line__unit">£7.20 each</span></span>
+        <span class="line__amt">£21.60</span>
+      </div>
+      <div class="line">
+        <span class="line__qty">1</span>
+        <span class="line__name">Camden Hells Lager<span class="line__unit">£6.80 each</span></span>
+        <span class="line__amt">£6.80</span>
+      </div>
+      <div class="line line--stale">
+        <span class="line__qty">2</span>
+        <span class="line__name">Espresso Martini<span class="line__unit">No longer on sale — hold to drop the line</span></span>
+        <span class="line__amt">£25.00</span>
+      </div>
+    </div>
+
+    <div class="panel__foot">
+      <div class="totals">
+        <span class="t-marquee">Total</span>
+        <span class="t-total">£53.40</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn--ghost t-button">CLEAR</button>
+        <button class="btn btn--primary t-button">SEND ORDER</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel__head">
+      <span class="t-marquee">Order</span>
+      <span class="t-meta">TILL 2 · EMPTY</span>
+    </div>
+    <div class="lines">
+      <div class="empty">
+        <div class="empty__mark"></div>
+        <p class="t-body" style="margin:0">Tap the menu to start a round.</p>
+      </div>
+    </div>
+    <div class="panel__foot">
+      <div class="totals">
+        <span class="t-marquee">Total</span>
+        <span class="t-total" style="color:var(--ink-disabled)">£0.00</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn--ghost t-button" style="opacity:.4">CLEAR</button>
+        <button class="btn btn--primary t-button" disabled>SEND ORDER</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h3>One money column</h3>
+    <p>Quantity on the left, amount on the right, both tabular and lined up in one column. A bartender reads straight down the check. The unit price sits under the name in muted text, so the sums can be checked at a glance.</p>
+
+    <h3>The price is fixed when the item is rung in</h3>
+    <p>A line keeps the price the item had when it was rung in. If a manager re-prices mid-round, the open check does not change under the bartender, which avoids an argument with a customer about a number that moved.</p>
+
+    <h3>Sold out mid-order</h3>
+    <p>The line is tinted and labelled rather than deleted, so money cannot disappear from a check without anyone noticing. The bartender removes it on purpose, and the send button stays active because the venue may still honour a round that has already been poured.</p>
+  </div>
+</div>

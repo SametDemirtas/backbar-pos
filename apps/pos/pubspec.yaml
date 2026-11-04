@@ -1,0 +1,24 @@
+name: pos
+description: "Backbar POS: till-side application for tablet and web."
+publish_to: 'none'
+version: 1.0.0+1
+resolution: workspace
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  backbar_pos_core:
+    path: ../../packages/core
+  firebase_core: ^4.1.4
+
+dev_dependencies:
+  fake_cloud_firestore: ^4.2.0
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

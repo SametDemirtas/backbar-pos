@@ -1,0 +1,171 @@
+<meta charset="utf-8">
+<link rel="stylesheet" href="tokens.css">
+<title>Editor sheet: create, edit, delete</title>
+
+<style>
+  .stage { display: flex; gap: var(--s6); align-items: flex-start; }
+
+  .phone {
+    width: 390px; background: var(--paper-well);
+    border: 1px solid var(--paper-line); border-radius: var(--r-sheet);
+    overflow: hidden; padding-top: var(--s7);
+  }
+  .sheet {
+    background: var(--paper-surface);
+    border-radius: var(--r-sheet) var(--r-sheet) 0 0;
+    box-shadow: var(--shadow-sheet);
+    padding: var(--s5) var(--s4) var(--s6);
+  }
+  .grab { width: 36px; height: 4px; border-radius: 2px; background: var(--paper-line);
+          margin: 0 auto var(--s5); }
+  .sheet__title { color: var(--ink-primary); font-size: 22px; font-weight: 700;
+                  font-stretch: 108%; margin: 0 0 var(--s5); }
+
+  .field { margin-bottom: var(--s4); }
+  .field label {
+    display: block; margin-bottom: 7px;
+    font-size: 11px; font-weight: 700; font-stretch: 118%;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--ink-secondary);
+  }
+  .input {
+    width: 100%; height: 56px; padding: 0 var(--s3);
+    background: var(--paper-well); color: var(--ink-primary);
+    border: 1px solid var(--paper-line); border-radius: var(--r-control);
+    font-family: inherit; font-size: 17px; font-weight: 550;
+  }
+  .input--focus { border-color: var(--marquee); box-shadow: 0 0 0 3px rgba(242,176,61,.22);
+                  background: var(--paper-surface); }
+  .input--error { border-color: var(--ember-ink); box-shadow: 0 0 0 3px rgba(185,58,37,.14); }
+  .input--money { font-variant-numeric: tabular-nums; }
+  .error { margin: 7px 0 0; color: var(--ember-ink); font-size: 13px; font-weight: 550; }
+
+  .money-wrap { position: relative; }
+  .money-wrap span {
+    position: absolute; left: var(--s3); top: 50%; transform: translateY(-50%);
+    color: var(--ink-muted); font-size: 17px; font-weight: 550;
+  }
+  .money-wrap .input { padding-left: 32px; }
+
+  .segmented { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .seg {
+    height: 48px; display: grid; place-items: center;
+    background: var(--paper-well); border: 1px solid var(--paper-line);
+    border-radius: var(--r-control); cursor: pointer;
+    font-size: 11px; font-weight: 750; font-stretch: 112%; letter-spacing: .1em;
+    color: var(--ink-secondary);
+  }
+  .seg--on { background: var(--marquee); border-color: var(--marquee); color: #2A1B03; }
+
+  .avail {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 64px; padding: 0 var(--s3); margin: var(--s5) 0;
+    background: var(--paper-well); border: 1px solid var(--paper-line);
+    border-radius: var(--r-control);
+  }
+  .avail__label { color: var(--ink-primary); font-size: 15px; font-weight: 600; }
+  .avail__hint  { color: var(--ink-muted); font-size: 12px; font-weight: 500; margin-top: 2px; }
+  .pill { width: 92px; height: 40px; border-radius: var(--r-control);
+          display: grid; place-items: center;
+          background: var(--marquee); color: #2A1B03;
+          font-size: 11px; font-weight: 800; letter-spacing: .1em; }
+
+  .btn { width: 100%; height: 60px; border: 0; border-radius: var(--r-control);
+         font-family: inherit; cursor: pointer; }
+  .btn--primary { background: var(--marquee); color: #2A1B03; }
+  .btn--danger  { background: transparent; color: var(--ember-ink);
+                  border: 1px solid rgba(185,58,37,.3); margin-top: var(--s2); }
+
+  .notes { max-width: 40ch; }
+  .notes h3 { font-size: 13px; font-weight: 700; font-stretch: 125%; letter-spacing: .16em;
+              text-transform: uppercase; color: var(--bone-secondary); margin: 0 0 var(--s2); }
+  .notes p  { font-size: 14px; line-height: 1.55; color: var(--bone-secondary); margin: 0 0 var(--s5); }
+</style>
+
+<div class="stage stage--dark">
+
+  <div class="phone">
+    <div class="sheet">
+      <div class="grab"></div>
+      <h2 class="sheet__title">Edit item</h2>
+
+      <div class="field">
+        <label>Name</label>
+        <input class="input input--focus" value="Espresso Martini">
+      </div>
+
+      <div class="field">
+        <label>Price</label>
+        <div class="money-wrap">
+          <span>£</span>
+          <input class="input input--money" value="12.50">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Category</label>
+        <div class="segmented">
+          <div class="seg seg--on">DRINKS</div>
+          <div class="seg">FOOD</div>
+          <div class="seg">SNACKS</div>
+          <div class="seg">MERCH</div>
+        </div>
+      </div>
+
+      <div class="avail">
+        <div>
+          <div class="avail__label">On sale</div>
+          <div class="avail__hint">Tills can sell it right now</div>
+        </div>
+        <div class="pill">ON SALE</div>
+      </div>
+
+      <button class="btn btn--primary t-button">SAVE</button>
+      <button class="btn btn--danger t-button">DELETE ITEM</button>
+    </div>
+  </div>
+
+  <div class="phone">
+    <div class="sheet">
+      <div class="grab"></div>
+      <h2 class="sheet__title">New item</h2>
+
+      <div class="field">
+        <label>Name</label>
+        <input class="input input--error" value="">
+        <p class="error">Give the item a name — this is what the bartender reads.</p>
+      </div>
+
+      <div class="field">
+        <label>Price</label>
+        <div class="money-wrap">
+          <span>£</span>
+          <input class="input input--money input--error" value="0.00">
+        </div>
+        <p class="error">A price of zero will pour free drinks all night.</p>
+      </div>
+
+      <div class="field">
+        <label>Category</label>
+        <div class="segmented">
+          <div class="seg seg--on">DRINKS</div>
+          <div class="seg">FOOD</div>
+          <div class="seg">SNACKS</div>
+          <div class="seg">MERCH</div>
+        </div>
+      </div>
+
+      <button class="btn btn--primary t-button" style="opacity:.35">SAVE</button>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h3>Money is typed as money</h3>
+    <p>A fixed currency mark, tabular figures and a decimal keypad. The value is parsed to integer pence straight away and never becomes a float, because the till has to balance at the end of the night.</p>
+
+    <h3>Errors say what would happen</h3>
+    <p>Instead of "invalid input", each message says what would go wrong. A manager filling in the form quickly is more likely to read "this will pour free drinks all night".</p>
+
+    <h3>Delete is easy to find</h3>
+    <p>Outlined rather than filled, at the bottom, and behind a confirmation. It uses ember, the colour the product keeps for what cannot be sold, what cannot be undone, and errors.</p>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+@font-face {
+  font-family: 'Archivo';
+  src: url('Archivo.ttf') format('truetype');
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+
+:root {
+  --ink-void: #0B0A09;
+  --ink-well: #131110;
+  --ink-surface: #1A1715;
+  --ink-raised: #23201D;
+  --ink-line: #322D29;
+  --ink-disabled: #4A433D;
+  --bone-primary: #F5F0E8;
+  --bone-secondary: #B8AFA3;
+  --bone-muted: #958C81;
+
+  --paper-base: #FAF7F2;
+  --paper-well: #F2EDE4;
+  --paper-surface: #FFFFFF;
+  --paper-raised: #F2EDE4;
+  --paper-line: #E4DCCF;
+  --paper-disabled: #B6AC9C;
+  --ink-primary: #1A1613;
+  --ink-secondary: #6B6156;
+  --ink-muted: #70675C;
+
+  --marquee: #F2B03D;
+  --marquee-ink: #8A5A0F;
+  --ember: #E5533D;
+  --ember-light: #B93A25;
+  --ember-ink: #A8321F;
+  --ember-ink-dark: #F06E5A;
+
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+
+  --r-badge: 2px;
+  --r-control: 6px;
+  --r-surface: 8px;
+  --r-sheet: 16px;
+
+  --shadow-sheet: 0 1px 2px rgba(26,22,19,.06), 0 8px 24px rgba(26,22,19,.08);
+
+  --t-press: 120ms;
+  --t-layout: 200ms;
+  --t-flash: 240ms;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+.t-marquee {
+  font-size: 13px;
+  font-weight: 700;
+  font-stretch: 125%;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.t-title    { font-size: 17px; font-weight: 600; line-height: 1.25; }
+.t-price    { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.t-total    { font-size: 40px; font-weight: 800; font-stretch: 87%;
+              letter-spacing: -.01em; font-variant-numeric: tabular-nums; line-height: 1; }
+.t-body     { font-size: 15px; font-weight: 450; line-height: 1.45; }
+.t-meta     { font-size: 12px; font-weight: 500; letter-spacing: .02em; }
+.t-button   { font-size: 15px; font-weight: 650; letter-spacing: .04em; }
+
+.stage {
+  padding: var(--s6);
+  min-height: 100vh;
+}
+.stage--dark  { background: var(--ink-void);  color: var(--bone-primary); }
+.stage--light { background: var(--paper-base); color: var(--ink-primary); }
+body:has(> .stage--dark)  { background: var(--ink-void); }
+body:has(> .stage--light) { background: var(--paper-base); }
+
+.stage__label {
+  font-size: 11px;
+  font-weight: 700;
+  font-stretch: 125%;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .45;
+  margin: 0 0 var(--s5);
+}
+.row   { display: flex; gap: var(--s4); flex-wrap: wrap; align-items: flex-start; }
+.stack { display: flex; flex-direction: column; gap: var(--s4); }
+.caption {
+  font-size: 12px; font-weight: 500; letter-spacing: .02em;
+  opacity: .5; margin-top: var(--s2);
+}

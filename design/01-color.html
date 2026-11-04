@@ -1,0 +1,102 @@
+<meta charset="utf-8">
+<link rel="stylesheet" href="tokens.css">
+<title>Colour: Backbar &amp; Daylight</title>
+
+<style>
+  .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+  .half { padding: var(--s6) var(--s6) var(--s7); }
+  .half--dark  { background: var(--ink-void);   color: var(--bone-primary); }
+  .half--light { background: var(--paper-base); color: var(--ink-primary); }
+
+  .ramp { display: flex; flex-direction: column; gap: 1px; margin-bottom: var(--s6); }
+  .swatch {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px var(--s4); font-size: 13px; font-weight: 500;
+  }
+  .swatch code { font-size: 11px; letter-spacing: .04em; opacity: .7; font-family: inherit; }
+
+  .accents { display: flex; gap: var(--s3); margin-bottom: var(--s5); }
+  .chip {
+    flex: 1; padding: var(--s4); border-radius: var(--r-control);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .chip b { font-size: 15px; font-weight: 700; }
+  .chip span { font-size: 11px; letter-spacing: .04em; opacity: .8; }
+
+  .contrast { border-top: 1px solid currentColor; padding-top: var(--s4); opacity: .85; }
+  .contrast div { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 0; }
+  .contrast b { font-weight: 700; }
+</style>
+
+<div class="split">
+  <section class="half half--dark">
+    <p class="stage__label">Backbar: the till, always dark</p>
+
+    <div class="ramp">
+      <div class="swatch" style="background:#0B0A09;color:#F5F0E8"><span>ink.void</span><code>#0B0A09</code></div>
+      <div class="swatch" style="background:#131110;color:#F5F0E8"><span>ink.well</span><code>#131110</code></div>
+      <div class="swatch" style="background:#1A1715;color:#F5F0E8"><span>ink.surface</span><code>#1A1715</code></div>
+      <div class="swatch" style="background:#23201D;color:#F5F0E8"><span>ink.raised</span><code>#23201D</code></div>
+      <div class="swatch" style="background:#322D29;color:#F5F0E8"><span>ink.line</span><code>#322D29</code></div>
+      <div class="swatch" style="background:#4A433D;color:#F5F0E8"><span>ink.disabled</span><code>#4A433D</code></div>
+      <div class="swatch" style="background:#958C81;color:#0B0A09"><span>bone.muted</span><code>#958C81</code></div>
+      <div class="swatch" style="background:#B8AFA3;color:#0B0A09"><span>bone.secondary</span><code>#B8AFA3</code></div>
+      <div class="swatch" style="background:#F5F0E8;color:#0B0A09"><span>bone.primary</span><code>#F5F0E8</code></div>
+    </div>
+
+    <div class="accents">
+      <div class="chip" style="background:#F2B03D;color:#2A1B03">
+        <b>marquee</b><span>#F2B03D — money, action, selection</span>
+      </div>
+      <div class="chip" style="background:#E5533D;color:#2A0B06">
+        <b>ember</b><span>#E5533D — sold out, destructive</span>
+      </div>
+      <div class="chip" style="background:#F06E5A;color:#2A0B06">
+        <b>ember.ink</b><span>#F06E5A — the dark-surface text form</span>
+      </div>
+    </div>
+
+    <div class="contrast" style="border-color:#322D29">
+      <div><span>bone.primary on ink.void</span><b>17.4 : 1</b></div>
+      <div><span>bone.secondary on ink.surface</span><b>8.2 : 1</b></div>
+      <div><span>bone.muted on ink.raised</span><b>4.9 : 1</b></div>
+      <div><span>marquee on ink.void</span><b>10.4 : 1</b></div>
+      <div><span>ember.ink on ink.surface</span><b>6.0 : 1</b></div>
+    </div>
+
+    <p class="caption">The base is a warm near-black rather than <code>#000</code>. Pure black smears on OLED and flattens the luminance steps that carry hierarchy here, since there are no drop shadows on dark.</p>
+  </section>
+
+  <section class="half half--light">
+    <p class="stage__label">Daylight: the manager's phone</p>
+
+    <div class="ramp">
+      <div class="swatch" style="background:#FAF7F2;color:#1A1613;box-shadow:inset 0 0 0 1px #E4DCCF"><span>paper.base</span><code>#FAF7F2</code></div>
+      <div class="swatch" style="background:#F2EDE4;color:#1A1613"><span>paper.well</span><code>#F2EDE4</code></div>
+      <div class="swatch" style="background:#FFFFFF;color:#1A1613;box-shadow:inset 0 0 0 1px #E4DCCF"><span>paper.surface</span><code>#FFFFFF</code></div>
+      <div class="swatch" style="background:#E4DCCF;color:#1A1613"><span>paper.line</span><code>#E4DCCF</code></div>
+      <div class="swatch" style="background:#B6AC9C;color:#1A1613"><span>paper.disabled</span><code>#B6AC9C</code></div>
+      <div class="swatch" style="background:#70675C;color:#FAF7F2"><span>ink.muted</span><code>#70675C</code></div>
+      <div class="swatch" style="background:#6B6156;color:#FAF7F2"><span>ink.secondary</span><code>#6B6156</code></div>
+      <div class="swatch" style="background:#1A1613;color:#FAF7F2"><span>ink.primary</span><code>#1A1613</code></div>
+    </div>
+
+    <div class="accents">
+      <div class="chip" style="background:#F2B03D;color:#2A1B03">
+        <b>marquee</b><span>fill stays; text form darkens to #8A5A0F</span>
+      </div>
+      <div class="chip" style="background:#A8321F;color:#FFF3F0">
+        <b>ember.ink</b><span>#A8321F — the light-surface form</span>
+      </div>
+    </div>
+
+    <div class="contrast" style="border-color:#E4DCCF">
+      <div><span>ink.primary on paper.base</span><b>16.8 : 1</b></div>
+      <div><span>ink.secondary on paper.surface</span><b>6.1 : 1</b></div>
+      <div><span>ink.muted on paper.well</span><b>4.8 : 1</b></div>
+      <div><span>marquee.ink on paper.surface</span><b>5.9 : 1</b></div>
+    </div>
+
+    <p class="caption">Same hues with the ramp inverted. The till is dark because it sits behind a bar at night; the manager app is light because it is often used in daylight. The only pure white in the product is the editing surface.</p>
+  </section>
+</div>
