@@ -10,6 +10,18 @@ shared widgets live in one Dart package, so each app holds only its own layout.
 You can run both apps locally against the Firebase emulator, without a Firebase
 account.
 
+![The till with an open check, just after the Espresso Martini was marked sold out in the manager app](docs/screenshots/till.png)
+
+<p>
+  <img src="docs/screenshots/manager.png" width="300" alt="The manager app's menu list, with sold-out items hatched">
+  &nbsp;
+  <img src="docs/screenshots/editor.png" width="300" alt="The manager app's editor sheet for an item">
+</p>
+
+Top: the till a moment after the manager marked the Espresso Martini sold out.
+Its tile flashes on the leading edge and its line on the open check is flagged.
+Bottom: the manager app's menu list and editor.
+
 ```
 backbar-pos/
 ├── packages/core/          the shared layer: models, money, order logic,
@@ -20,7 +32,8 @@ backbar-pos/
 ├── tools/                  rules tests + the demo menu seeder
 ├── DESIGN.md               the design system and why it is that way
 ├── design/                 HTML previews of it, written before any Flutter
-└── docs/architecture.md    widget trees and the core/app boundary
+└── docs/                   architecture notes (widget trees, the core/app
+                            boundary) and these screenshots
 ```
 
 ---
